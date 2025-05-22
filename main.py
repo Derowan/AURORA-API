@@ -2,8 +2,6 @@ from fastapi import FastAPI
 from aurora import AuroraSmall
 
 app = FastAPI()
-model = AuroraSmall()
-model.load_checkpoint("microsoft/aurora", "aurora-0.25-small-pretrained.ckpt")
 
 @app.get("/")
 def root():
@@ -11,6 +9,8 @@ def root():
 
 @app.get("/forecast")
 def get_forecast():
+    model = AuroraSmall()
+    model.load_checkpoint("microsoft/aurora", "aurora-0.25-small-pretrained.ckpt")
     input_tensor = model.example_inputs()
     output = model(input_tensor)
     return {"forecast_shape": str(output.shape)}
