@@ -1,0 +1,4 @@
+microsoft-aurora
+torch
+fastapi
+uvicorn
